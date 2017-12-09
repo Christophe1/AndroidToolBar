@@ -7,4 +7,14 @@
     app:popupTheme="@style/CustomPopupStyle"
     >
 
+    <android.support.v7.widget.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:title="Search..."
+        android:icon="@drawable/tb_search"
+        android:showAsAction="always"
+        android:actionViewClass="android.widget.SearchView"
+        />
+
 </android.support.v7.widget.Toolbar>
