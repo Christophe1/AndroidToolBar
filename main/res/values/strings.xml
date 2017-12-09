@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">AndroifToolBar</string>
+    <string name="app_name">AndroidToolBar</string>
+    <string name="new_contact">New Contact</string>
 </resources>
