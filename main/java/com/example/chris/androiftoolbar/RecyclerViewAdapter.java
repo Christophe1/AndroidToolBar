@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -18,12 +17,13 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
-    public List<SelectPhoneContact>mSelectPhoneContact;
-    private ArrayList<SelectPhoneContact> arraylist;
+    //make a List containing info about SelectPhoneCOntact objects
+    public List<SelectPhoneContact> theContactsList;
+  //  private ArrayList<SelectPhoneContact> arraylist;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        //In each recycler_blueprint show the items you want to have
+        //In each recycler_blueprint show the items you want to have appearing
 
         public TextView title, phone;
         public CheckBox check;
@@ -43,10 +43,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     public RecyclerViewAdapter(List<SelectPhoneContact>selectPhoneContacts) {
-        mSelectPhoneContact=selectPhoneContacts;
-        this.arraylist = new ArrayList<SelectPhoneContact>();
-        this.arraylist.addAll(mSelectPhoneContact);
-        System.out.println("this.arraylist" + this.arraylist);
+        theContactsList =selectPhoneContacts;
+       // this.arraylist = new ArrayList<SelectPhoneContact>();
+       // this.arraylist.addAll(theContactsList);
+       // System.out.println("this.arraylist" + this.arraylist);
 
     }
 
@@ -61,7 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder viewHolder, int position){
-        SelectPhoneContact selectPhoneContact = mSelectPhoneContact.get(position);
+        SelectPhoneContact selectPhoneContact = theContactsList.get(position);
         TextView title = viewHolder.title;
         title.setText(selectPhoneContact.getName());
 
@@ -72,8 +72,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount(){
-/*        if(mSelectPhoneContact == null)
+/*        if(theContactsList == null)
             return 0;*/
-        return mSelectPhoneContact.size();
+        return theContactsList.size();
     }
 }
