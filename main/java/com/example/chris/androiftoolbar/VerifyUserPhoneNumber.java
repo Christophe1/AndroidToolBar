@@ -75,7 +75,7 @@ public class VerifyUserPhoneNumber extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-
+            VerifyUserPhoneNumber.this.finish();
 
         }
     }
