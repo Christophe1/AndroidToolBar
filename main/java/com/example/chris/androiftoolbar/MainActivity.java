@@ -1,6 +1,8 @@
 package com.example.chris.androiftoolbar;
 
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
@@ -97,12 +100,57 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.new_contact:
                 //start the NewContact class
+
                 Intent intent = new Intent(MainActivity.this, NewContact.class);
 
                 startActivity(intent);
+
+                System.out.println("New Contact has been clicked");
+
+
+                //execute the AsyncTask
+               // MainActivity.StartUp startUp = new MainActivity.StartUp();
+                //startUp.execute();
+
+/*                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                    startUp.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                else
+                    startUp.execute();*/
+
+
+
+
+
+//                Intent intent = new Intent(MainActivity.this, NewContact.class);
+//
+//                startActivity(intent);
                 return true;
         }
         return false;
     }
 
+
+
+    private class StartUp extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            Intent intent = new Intent(MainActivity.this, NewContact.class);
+
+            startActivity(intent);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
 }

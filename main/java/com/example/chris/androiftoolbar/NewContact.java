@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,6 +30,8 @@ public class NewContact extends AppCompatActivity {
     ArrayList <String> allPhonesofContacts;
     ArrayList <String> allNamesofContacts;
 
+    ArrayList<String> matchingContacts = new ArrayList<String>();
+
     //define a list made out of SelectPhoneContacts and call it theContactsList
     public List<SelectPhoneContact> theContactsList;
     //define an array list made out of SelectContacts and call it arraylist
@@ -43,6 +46,12 @@ public class NewContact extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_layout);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        LoadContact loadContact = new LoadContact();
+        loadContact.execute();
 
 /*        theContactsList = selectPhoneContacts;
         this.arraylist = new ArrayList<SelectPhoneContact>();
@@ -108,6 +117,10 @@ public class NewContact extends AppCompatActivity {
             System.out.println("NewContact:the amount in allPhonesofContacts :" + allPhonesofContacts.size());
             System.out.println("NewContact:the amount in allNamesofContacts :" + allNamesofContacts.size());
 
+            matchingContacts.add("+3531234567");
+            matchingContacts.add("+353868132813");
+            matchingContacts.add("+353863366715");
+            matchingContacts.add("+353858716422");
 
             //for every value in the allPhonesofContacts array list, call it phoneNumberofContact
             for (int i = 0; i < allPhonesofContacts.size(); i++) {

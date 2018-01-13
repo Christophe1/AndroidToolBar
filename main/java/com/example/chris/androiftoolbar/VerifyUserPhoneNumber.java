@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -43,10 +45,24 @@ public class VerifyUserPhoneNumber extends AppCompatActivity {
 
         //execute the AsyncTask
         VerifyUserPhoneNumber.StartUpInfo startUpInfo = new VerifyUserPhoneNumber.StartUpInfo();
+
         startUpInfo.execute();
+
+/*        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            startUpInfo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        else
+            startUpInfo.execute();*/
 
         //get all the contacts on the user's phone
         //getPhoneContacts();
+
+        // then start the next activity, PopulistoListView
+  /*      Intent myIntent1 = new Intent(VerifyUserPhoneNumber.this, MainActivity.class);
+        // myIntent1.putExtra("phoneNumberofContact", phoneNumberofContact);
+        // myIntent1.putExtra("phoneNameofContact", name);
+        VerifyUserPhoneNumber.this.startActivity(myIntent1);*/
+
+
     }
 
 
@@ -55,6 +71,8 @@ public class VerifyUserPhoneNumber extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            Toast.makeText(VerifyUserPhoneNumber.this,"started async",
+                    Toast.LENGTH_SHORT).show();
 
         }
 
@@ -75,6 +93,8 @@ public class VerifyUserPhoneNumber extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            Toast.makeText(VerifyUserPhoneNumber.this,"finished async",
+                    Toast.LENGTH_SHORT).show();
             VerifyUserPhoneNumber.this.finish();
 
         }
@@ -84,6 +104,7 @@ public class VerifyUserPhoneNumber extends AppCompatActivity {
     //get the names and phone numbers of all phone contacts in phone book, take out duplicates
     //and put the phone numbers in E164 format
     private void getPhoneContacts() {
+
 
 //          we have this here to avoid cursor errors
         if (cursor != null) {
@@ -185,8 +206,6 @@ public class VerifyUserPhoneNumber extends AppCompatActivity {
                     VerifyUserPhoneNumber.this.startActivity(myIntent1);
 
 
-
-
                     //we will save the array list allPhonesofContacts,
                     //with this we will put all phone names of contacts on user's phone into our ListView, in other activities
                     SharedPreferences sharedPreferencesallPhonesofContacts = PreferenceManager.getDefaultSharedPreferences(getApplication());
@@ -230,10 +249,17 @@ public class VerifyUserPhoneNumber extends AppCompatActivity {
 //                }
         }
 
-
+        //VerifyUserPhoneNumber.this.finish();
     }
 
+
+
+
 }
+
+
+
+
 
 
 
